@@ -1,0 +1,24 @@
+{
+  "name": "jsgithub_cli",
+  "version": "1.0.0",
+  "description": "Use GitHub API to fetch user activity and display it in the terminal.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hkc619/jsgithub_cli.git"
+  },
+  "author": "hkc619",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hkc619/jsgithub_cli/issues"
+  },
+  "homepage": "https://github.com/hkc619/jsgithub_cli#readme",
+  "dependencies": {
+    "commander": "^14.0.0",
+    "octokit": "^5.0.3"
+  },
+  "type": "module"
+}
