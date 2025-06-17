@@ -5,10 +5,24 @@ const octokit = new Octokit({
 });
 
 let res = await octokit.request("GET /users/{username}/events/public", {
-  username: "hkc619",
+  username: "kylemocode",
   headers: {
     "X-Github-Api-Version": "2022-11-28",
   },
+  page: 1,
+  per_page: 30,
 });
 
-console.log(res.data);
+const data = res.data;
+// switch for events => push, create, watch, fork, PullRequestReviewEvent
+for (var i = 0; i < data.length; i++) {
+  if (data[i].type == "PushEvent") {
+    console.log(
+      "- Pushed " + data[i].payload.size + " commits to" + data[i].repo.name
+    );
+  } else if (data[i].type == "CreateEvent") {
+    console.log("- Created at " + data[i].repo.name);
+  } else {
+    console.log(data[i]);
+  }
+}
