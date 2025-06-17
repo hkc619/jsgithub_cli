@@ -5,7 +5,7 @@ const octokit = new Octokit({
 });
 
 let res = await octokit.request("GET /users/{username}/events/public", {
-  username: "liuhh02",
+  username: "kylemocode",
   headers: {
     "X-Github-Api-Version": "2022-11-28",
   },
@@ -14,7 +14,7 @@ let res = await octokit.request("GET /users/{username}/events/public", {
 });
 
 const data = res.data;
-// switch for events => push, create, watch, fork
+// switch for events => push, create, watch, fork, PullRequestReviewEvent
 for (var i = 0; i < data.length; i++) {
   if (data[i].type == "PushEvent") {
     console.log(
