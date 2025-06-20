@@ -1,4 +1,5 @@
 import { Octokit, App } from "octokit";
+import chalk from "chalk";
 
 export async function userAct(userName) {
   const octokit = new Octokit({
@@ -15,19 +16,30 @@ export async function userAct(userName) {
       },
     });
     const userData = res.data;
+
     // switch for events => push, create, watch, fork, PullRequestReviewEvent
     for (var i = 0; i < userData.length; i++) {
-      if (userData[i].type == "PushEvent") {
-        console.log(
-          "- Pushed " +
-            userData[i].payload.size +
-            " commits to" +
-            userData[i].repo.name
-        );
-      } else if (userData[i].type == "CreateEvent") {
-        console.log("- Created at " + userData[i].repo.name);
-      } else {
-        console.log(userData[i].type);
+      switch (userData[i].type) {
+        case "PushEvent":
+          console.log(
+            "- Pushed " +
+              userData[i].payload.size +
+              " commits to" +
+              userData[i].repo.name
+          );
+          break;
+
+        case "CreatEvent":
+          console.log("- Created at " + userData[i].repo.name);
+          break;
+
+        case "PullRequestEvent":
+          console.log("- Pulled a request to" + userData[i].repo.name);
+          break;
+
+        default:
+          console.log(chalk.red(userData[i].type));
+          console.log(userData[i]);
       }
     }
   } catch (error) {
