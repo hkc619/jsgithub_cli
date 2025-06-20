@@ -2,7 +2,6 @@
 
 import { Command } from "commander";
 import { userAct } from "./services/userAct.js";
-import { Octokit, App } from "octokit";
 import "dotenv/config";
 
 const program = new Command();
