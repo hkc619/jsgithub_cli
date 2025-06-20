@@ -1,8 +1,8 @@
 {
-  "name": "jsgithub_cli",
+  "name": "github-activity-tool",
   "version": "1.0.0",
   "description": "Use GitHub API to fetch user activity and display it in the terminal.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,7 @@
   "author": "hkc619",
   "license": "ISC",
   "bin": {
-    "github-activity": "./index.js"
+    "github-activity-tool": "src/index.js"
   },
   "bugs": {
     "url": "https://github.com/hkc619/jsgithub_cli/issues"

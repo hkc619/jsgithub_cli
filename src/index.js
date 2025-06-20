@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { userAct } from "userAct.js";
+import { userAct } from "./services/userAct.js";
 import { Octokit, App } from "octokit";
 import "dotenv/config";
 
@@ -19,6 +19,7 @@ program
 program
   .argument("<userName>", "Username of user's activities you want to check.")
   .action((userName) => {
+    console.log(userName);
     userAct(userName);
   });
 
