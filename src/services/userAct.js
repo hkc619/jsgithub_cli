@@ -1,9 +1,11 @@
 import { Octokit, App } from "octokit";
 import chalk from "chalk";
 
-export async function userAct(userName) {
+export async function userAct(userName, perPage, page) {
   const octokit = new Octokit({
     auth: process.env.authToken,
+    per_page: perPage,
+    page: page,
   });
 
   try {
@@ -22,23 +24,48 @@ export async function userAct(userName) {
       switch (userData[i].type) {
         case "PushEvent":
           console.log(
-            "- Pushed " +
+            chalk.bgYellowBright("- Pushed") +
+              " " +
               userData[i].payload.size +
               " commits to" +
-              userData[i].repo.name
+              chalk.yellow(userData[i].repo.name)
           );
           break;
 
-        case "CreatEvent":
-          console.log("- Created at " + userData[i].repo.name);
+        case "CreateEvent":
+          console.log(
+            chalk.bgBlue("- Created") +
+              " at " +
+              chalk.yellow(userData[i].repo.name)
+          );
           break;
 
         case "PullRequestEvent":
-          console.log("- Pulled a request to" + userData[i].repo.name);
+          console.log(
+            chalk.bgCyan("- Pulled") +
+              " a request to " +
+              chalk.yellow(userData[i].repo.name)
+          );
+          break;
+
+        case "WatchEvent":
+          console.log(
+            chalk.bgYellow("- Stared") +
+              " to " +
+              chalk.yellow(userData[i].repo.name)
+          );
+          break;
+
+        case "ForkEvent":
+          console.log(
+            chalk.bgGreen("- Forked") +
+              " from " +
+              chalk.yellow(userData[i].repo.name)
+          );
           break;
 
         default:
-          console.log(chalk.red(userData[i].type));
+          console.log(chalk.bgRed(userData[i].type));
           console.log(userData[i]);
       }
     }
